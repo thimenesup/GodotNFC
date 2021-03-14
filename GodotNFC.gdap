@@ -1,0 +1,5 @@
+[config]
+
+name="GodotNFC"
+binary_type="local"
+binary="GodotNFC.1.0.0.release.aar"

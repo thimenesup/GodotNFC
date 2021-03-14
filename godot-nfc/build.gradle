@@ -1,0 +1,28 @@
+plugins {
+    id 'com.android.library'
+}
+
+ext.pluginVersionCode = 2
+ext.pluginVersionName = "1.0.0"
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 18
+        targetSdkVersion 29
+        versionCode pluginVersionCode
+        versionName pluginVersionName
+    }
+
+    libraryVariants.all { variant ->
+        variant.outputs.all { output ->
+            output.outputFileName = "GodotNFC.$pluginVersionName.${variant.name}.aar"
+        }
+    }
+}
+
+dependencies {
+    compileOnly fileTree(dir: System.getenv('GODOT_ANDROID_PLUGIN_AAR_DIR'), include: ['godot-lib*.aar'])
+}

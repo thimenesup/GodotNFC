@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.thimenesup.godotnfc">
+
+    <application>
+
+        <meta-data
+            android:name="org.godotengine.plugin.v1.GodotCamera"
+            android:value="org.thimenesup.godotcamera.GodotCamera" />
+
+    </application>
+</manifest>

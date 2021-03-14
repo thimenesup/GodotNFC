@@ -1,0 +1,10 @@
+#Build
+.gradle
+build
+godot-nfc/build
+
+# Local configuration file
+local.properties
+
+# IntelliJ
+.idea

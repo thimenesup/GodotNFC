@@ -1,0 +1,2 @@
+include ':godot-nfc'
+rootProject.name = "Godot NFC"
