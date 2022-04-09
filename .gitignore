@@ -1,10 +1,12 @@
-#Build
-.gradle
-build
-godot-nfc/build
+#Android Plugin Build
+android/build
+android/.build_version
+android/plugins/.gradle
+android/plugins/build
+android/plugins/godot-nfc/.gradle
+android/plugins/godot-nfc/.idea
+android/plugins/godot-nfc/build
 
-# Local configuration file
-local.properties
-
-# IntelliJ
-.idea
+#Resources
+*.import
+*.png

@@ -1,0 +1,44 @@
+apply plugin: 'com.android.library'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.0.0"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+    }
+
+    libraryVariants.all { variant ->
+        variant.outputs.all { output ->
+            output.outputFileName = "GodotNFC.${variant.name}.aar"
+        }
+    }
+}
+
+dependencies {
+    compileOnly fileTree(dir: System.getenv('GODOT_ANDROID_PLUGIN_AAR_DIR'), include: ['godot-lib*.aar'])
+
+    //Using Godot static class needs this
+    compileOnly 'androidx.appcompat:appcompat:1.1.0'
+}

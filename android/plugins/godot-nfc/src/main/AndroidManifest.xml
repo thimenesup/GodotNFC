@@ -4,8 +4,8 @@
     <application>
 
         <meta-data
-            android:name="org.godotengine.plugin.v1.GodotCamera"
-            android:value="org.thimenesup.godotcamera.GodotCamera" />
+            android:name="org.godotengine.plugin.v1.GodotNFC"
+            android:value="org.thimenesup.godotnfc.GodotNFC" />
 
     </application>
 </manifest>

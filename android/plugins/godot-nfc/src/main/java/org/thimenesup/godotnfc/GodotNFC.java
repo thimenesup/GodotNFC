@@ -1,7 +1,6 @@
 package org.thimenesup.godotnfc;
 
 import org.godotengine.godot.Godot;
-import org.godotengine.godot.GodotLib;
 import org.godotengine.godot.plugin.GodotPlugin;
 import org.godotengine.godot.plugin.SignalInfo;
 
@@ -10,10 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 
-import android.app.Activity;
-
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.app.PendingIntent;
 
 import android.nfc.NfcAdapter;
@@ -22,20 +18,13 @@ import android.nfc.NdefRecord;
 import android.nfc.NdefMessage;
 import android.os.Parcelable;
 
-
 public class GodotNFC extends GodotPlugin {
-
-    public static final String TAG = "GodotNFC";
-
-    private Godot godot = null;
 
     private NfcAdapter nfcAdapter = null;
     private int status = 0;
 
-
     public GodotNFC(Godot godot) {
         super(godot);
-        this.godot = godot;
     }
 
     @Override
@@ -46,9 +35,9 @@ public class GodotNFC extends GodotPlugin {
     @Override
     public List<String> getPluginMethods() {
         return Arrays.asList(
-                "init",
                 "enableNFC",
-                "getStatus"
+                "getStatus",
+                "pollTags"
         );
     }
 
@@ -61,11 +50,6 @@ public class GodotNFC extends GodotPlugin {
 
         return signals;
     }
-
-    public void init(final int script_id) {
-
-    }
-
 
     public void enableNFC() {
         getActivity().runOnUiThread(new Runnable() {
@@ -83,10 +67,10 @@ public class GodotNFC extends GodotPlugin {
                     Intent intent = new Intent(getActivity(), getActivity().getClass());
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-                    PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(),0, intent,0);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, intent, 0);
                     //IntentFilter[] intentFilter = new IntentFilter[]{};
 
-                    nfcAdapter.enableForegroundDispatch(getActivity(), pendingIntent,null,null);
+                    nfcAdapter.enableForegroundDispatch(getActivity(), pendingIntent, null, null);
                 }
                 else {
                     status = 0;
@@ -97,15 +81,12 @@ public class GodotNFC extends GodotPlugin {
         });
     }
 
-    public int getStatus()
-    {
+    public int getStatus() {
         return status;
     }
 
-    public void onMainResume() {
-        //For some reason, this gets also called (and onMainPause), when... an Intent happens...? ...why? Lets use this I guess, since it doesn't look like there is another way to get an Intent...
-        Intent intent = getActivity().getIntent();
-
+    public void pollTags() {
+        Intent intent = Godot.getCurrentIntent();
         if (intent.hasExtra(NfcAdapter.EXTRA_TAG)) {
             Parcelable[] parcelables = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
             if (parcelables == null)
@@ -125,7 +106,6 @@ public class GodotNFC extends GodotPlugin {
                 }
             }
         }
-
     }
 
 }
