@@ -9,15 +9,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Info" type="Label" parent="."]
-margin_right = 512.0
-margin_bottom = 512.0
+[node name="Info" type="RichTextLabel" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 520.0
+margin_bottom = 712.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Debug Info"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Input" type="LineEdit" parent="."]
+margin_left = 512.0
+margin_top = 8.0
+margin_right = 768.0
+margin_bottom = 40.0
+placeholder_text = "Tag write"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 64, 64 )
+position = Vector2( 1200, 64 )
 texture = ExtResource( 2 )
+[connection signal="text_entered" from="Input" to="." method="_on_Input_text_entered"]
